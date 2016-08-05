@@ -17,3 +17,9 @@ Buttons
 LEDs
 * Warning that detecting presense, but no activity
 * Alert to start moving?
+
+
+
+Thoughts
+* Might need to use Arduinno to count flywheel steps
+* Or build a step counter, which sounds too complicated
