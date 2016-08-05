@@ -23,3 +23,8 @@ LEDs
 Thoughts
 * Might need to use Arduinno to count flywheel steps
 * Or build a step counter, which sounds too complicated
+
+Crazy future
+* graph activity throughout day (rrdtool?)
+* Notify me to pickup pace
+* Integrate with calendar to tell me when I need to "increase speed" based upon how I've categorized the meeting itself
