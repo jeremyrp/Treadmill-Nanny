@@ -17,7 +17,6 @@ unsigned long startTime;
 unsigned long stopTime;
 unsigned int stateCount; // count of state changes
 unsigned int prevStateCount; // Previous count of state changes before resetting to 0;
-//String dataToCloud = String("");
 
 // Constants
 #define sensorInput D1 // The input that has a sensor to detect event; note:  for UNO, must be pin 2 or 3

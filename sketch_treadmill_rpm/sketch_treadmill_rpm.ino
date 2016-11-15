@@ -1,3 +1,7 @@
+// DEPRECATED - ended up replacing Arduino with Photon
+
+
+
 // Author: Jeremy Phillips
 // License: GPL
 // Version 2016.10.19.1

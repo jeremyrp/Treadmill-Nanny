@@ -40,6 +40,3 @@ def lambda_handler(event, context):
             }
         )
 
-arn:aws:sts::361319316538:assumed-role/treadmill_nanny_metrics/treadmill_nanny_inbound_metric
-
-arn:aws:sts::361319316538:assumed-role/treadmill_nanny_metrics/treadmill_nanny_inbound_metric
