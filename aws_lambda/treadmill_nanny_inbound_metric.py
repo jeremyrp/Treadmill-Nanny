@@ -14,7 +14,7 @@ import logging
 import json
 
 # Change to true to enable logging
-debugFlag = True
+debugFlag = False
 
 def lambda_handler(event, context):
     try:
@@ -32,18 +32,21 @@ def lambda_handler(event, context):
 
         # Put data in dynamo
         dynamodb = boto3.resource("dynamodb", region_name='us-west-2')
-        dynamoTable = dynamodb.Table('TreadmillNannyMetrics')
+        dynamoTable = dynamodb.Table('Treadmill_Nanny_Metrics_v2016.NOV.29')
 
         dynamoResponse = dynamoTable.put_item(
             Item={
-                'MetricDate': 'Metric' + publishedTimestamp.strftime("%y%m%d%H%M%S"),
-                'publishedDate': publishedTimestamp.strftime("%y%m%d"),
+                'publishedDate': int(publishedTimestamp.strftime("%y%m%d")),
                 'publishedTimestamp': int((publishedTimestamp - datetime.datetime(1970, 1, 1)).total_seconds()),
-                'publishedDatetime': publishedTimestamp.isoformat(),
                 'stepCount': stepCount
             }
         )
-        # logger.info('Metric captured successfully')
+#                'MetricDate': 'Metric' + publishedTimestamp.strftime("%y%m%d%H%M%S"),
+#                'publishedDatetime': publishedTimestamp.isoformat(),
+
+
+        if debugFlag:
+            debugLog.info('Metric captured successfully')
         return {
             "statusCode": "200",
             "headers": {"Content-Type": "application/json"},
