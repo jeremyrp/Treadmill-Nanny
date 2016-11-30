@@ -33,26 +33,26 @@ def lambda_handler(event, context):
 
         # Put data in dynamo
         dynamodb = boto3.resource("dynamodb", region_name='us-west-2')
-        dynamoTable = dynamodb.Table('TreadmillNannyMetrics')
+        dynamoTable = dynamodb.Table('Treadmill_Nanny_Metrics_v2016.NOV.29')
 
         dynamoResponse = dynamoTable.query(
-            KeyConditionExpression
-            Item={
-                'MetricDate': 'Metric' + publishedTimestamp.strftime("%y%m%d%H%M%S"),
-                'publishedDate': publishedTimestamp.strftime("%y%m%d"),
-                'publishedTimestamp': int((publishedTimestamp - datetime.datetime(1970, 1, 1)).total_seconds()),
-                'publishedDatetime': publishedTimestamp.isoformat(),
-                'stepCount': stepCount
-            }
+            KeyConditionExpression=Key('publishedDate').eq(int(datetime.now().strftime("%y%m%d"))))
         )
 
+        # Build response of metrics
+        metricsResponse = dict()
+        for itemResponse in dynamoResponse['Items']:
+            metricsResponse[itemResponse['publishedTimestamp']]=itemResponse['stepCount']
+
+
         if debugFlag:
-            debugLog.info('Metric captured successfully')
+            debugLog.info('Response info {}'.format(metricsResponse))
+
 
         return {
             "statusCode": "200",
             "headers": {"Content-Type": "application/json"},
-            "body": "{ \"data\": \"Success\" }"
+            "body": JSONEncoder().encode(metricsResponse)
         }
 
     except:
