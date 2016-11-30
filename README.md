@@ -24,6 +24,10 @@ LEDs
 Thoughts
 * Might need to use Arduinno to count flywheel steps
 * Or build a step counter, which sounds too complicated
+* Client using ???
+ * AngularJS ?
+ * jQuery ?
+ * Google Charts - https://developers.google.com/chart/
 
 Crazy future
 * graph activity throughout day (rrdtool?)
