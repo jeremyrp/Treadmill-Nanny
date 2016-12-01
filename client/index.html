@@ -5,14 +5,15 @@
     <title>Treadmill Nanny</title>
     <link rel="stylesheet" href="./treadmill_nanny.css">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="./treadmill_nanny.js"></script>
     <script type="text/javascript">
 
       // Load the Visualization API and the corechart package.
-      google.charts.load('current', {'packages':['corechart']});
+      //google.charts.load('current', {'packages':['corechart']});
 
       // Set a callback to run when the Google Visualization API is loaded.
-      google.charts.setOnLoadCallback(drawChart);
+      //google.charts.setOnLoadCallback(drawChart);
 
       // Callback that creates and populates a data table,
       // instantiates the pie chart, passes in the data and
@@ -47,6 +48,14 @@
 
         chart.draw(data, options);
       }
+
+
+      // Load data
+    $.get("", function postResponse(data, status) {
+        $("chart_metrics").text(data);
+    });
+
+        //
     </script>
 </head>
 <body>

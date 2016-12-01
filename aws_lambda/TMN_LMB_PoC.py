@@ -21,15 +21,15 @@ def lambda_handler(event, context):
         if debugFlag:
             debugLog = logging.getLogger()
             debugLog.setLevel(logging.INFO)
-            debugLog.info('Debug info {}'.format(event))
-
+            debugLog.info('Debug event {}'.format(event))
+            debugLog.info('Debug context {}'.format(context))
 
 
 
 
 
         if debugFlag:
-            debugLog.info('Metric captured successfully')
+            debugLog.info('Lambda Function Completed Successfully')
         # return {
         #     "statusCode": "200",
         #     "headers": {"Content-Type": "application/json"},

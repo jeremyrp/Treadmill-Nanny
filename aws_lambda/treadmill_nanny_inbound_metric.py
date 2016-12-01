@@ -7,11 +7,15 @@ __status__ = "Production"
 ###  Description:  Lambda function for recording of inbound metrics from treadmill nanny to dynamodb
 ###  Version: 2016.11.22.1
 
+###  Environment Variables
+###  TMN_DDB_TableName:  DynamoDB Table Name
+
 import boto3
 import datetime
 import dateutil.parser
 import logging
 import json
+import os
 
 # Change to true to enable logging
 debugFlag = False
@@ -31,8 +35,8 @@ def lambda_handler(event, context):
         stepCount = int(dataPayload['data'])
 
         # Put data in dynamo
-        dynamodb = boto3.resource("dynamodb", region_name='us-west-2')
-        dynamoTable = dynamodb.Table('Treadmill_Nanny_Metrics_v2016.NOV.29')
+        dynamodb = boto3.resource("dynamodb", region_name=os.environ['AWS_REGION'])
+        dynamoTable = dynamodb.Table(os.environ['TMN_DDB_TableName'])
 
         dynamoResponse = dynamoTable.put_item(
             Item={
@@ -41,9 +45,6 @@ def lambda_handler(event, context):
                 'stepCount': stepCount
             }
         )
-#                'MetricDate': 'Metric' + publishedTimestamp.strftime("%y%m%d%H%M%S"),
-#                'publishedDatetime': publishedTimestamp.isoformat(),
-
 
         if debugFlag:
             debugLog.info('Metric captured successfully')
